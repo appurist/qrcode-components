@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import QrReader from 'react-qr-scanner'
 
 const READY_MESSAGE = 'Scanning for QR code...';
-const BUSY_MESSAGE = 'Got it';
+const SUCCESS_MESSAGE = 'Got it';
 const RESET_TIMEOUT = 3000; // 3 seconds
 
 class QRCodeReader extends Component {
@@ -10,7 +10,7 @@ class QRCodeReader extends Component {
     super(props)
     this.enabled = true;
     this.readyMessage = props.ready || READY_MESSAGE;
-    this.busyMessage = props.busy || BUSY_MESSAGE;
+    this.successMessage = props.success || SUCCESS_MESSAGE;
     this.state = {
       delay: 500,
       overlay: this.readyMessage,
@@ -24,7 +24,7 @@ class QRCodeReader extends Component {
       this.setState({ overlay: this.readyMessage });
       if (data.text) {
         this.setState({
-          overlay: this.busyMessage,
+          overlay: this.successMessage,
         });
         if (typeof this.props.onData === 'function') {
           this.props.onData(data);
