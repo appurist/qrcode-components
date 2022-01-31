@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-scanner'
 
-const READY_MESSAGE = '(ready to scan QR code)';
-const RESET_TIMEOUT = 5000; // 5 seconds
+const READY_MESSAGE = 'Ready to scan...';
+const RESET_TIMEOUT = 3000; // 3 seconds
 
 class QRCodeReader extends Component {
   constructor(props){
     super(props)
     this.enabled = true;
+    this.readyMessage = props.ready || READY_MESSAGE;
     this.state = {
       delay: 500,
-      result: READY_MESSAGE,
+      overlay: this.readyMessage,
     }
     this.handleScan = this.handleScan.bind(this)
   }
   handleScan(data){
     if (this.enabled && data) {
-      // Reset the scan result every RESET_TIMEOUT interval.
+      // Reset the scan overlay every RESET_TIMEOUT interval.
       this.enabled = false;
-      this.setState({ result: READY_MESSAGE });
+      this.setState({ overlay: this.readyMessage });
       if (data.text) {
         this.setState({
-          result: data.text,
+          overlay: '',
         });
         if (typeof this.props.onData === 'function') {
           this.props.onData(data);
@@ -30,7 +31,7 @@ class QRCodeReader extends Component {
         console.log("Got something but I can't decode it.");
       }
       setTimeout(()=>{
-        this.setState({ result: READY_MESSAGE });
+        this.setState({ overlay: this.readyMessage });
         this.enabled = true;
       }, RESET_TIMEOUT);
     }
@@ -42,17 +43,18 @@ class QRCodeReader extends Component {
     const previewStyle = {
       height: this.props.height || 240,
       width: this.props.width || 320,
+      zIndex: 5
     }
-
     return(
-      <div>
+      <div className='video-container'>
         <QrReader
           delay={this.state.delay}
           style={previewStyle}
           onError={this.handleError}
           onScan={this.handleScan}
-          />
-        <p>{this.state.result}</p>
+          >
+        </QrReader>
+        <p className='video-overlay'>{this.state.overlay}</p>
       </div>
     )
   }

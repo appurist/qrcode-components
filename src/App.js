@@ -25,6 +25,9 @@ function App() {
       <section>
         <QRCodeShow value={url} size={128} />
       </section>
+      <section>
+        <p>{url}</p>
+      </section>
     </div>
   );
 }
