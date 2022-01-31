@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import QrReader from 'react-qr-scanner'
 
-const READY_MESSAGE = 'Ready to scan...';
+const READY_MESSAGE = 'Scanning for QR code...';
 const RESET_TIMEOUT = 3000; // 3 seconds
 
 class QRCodeReader extends Component {
@@ -42,19 +42,43 @@ class QRCodeReader extends Component {
   render(){
     const previewStyle = {
       height: this.props.height || 240,
-      width: this.props.width || 320,
+      width: this.props.width || 320
+    }
+    const containerStyle = {
+      display: 'inline-block',
+      position: 'relative',
+      margin: 0,
+      padding: 0,
+      textAlign: 'center',
+      verticalAlign: 'middle',
       zIndex: 5
     }
+
+    const overlayStyle = {
+      position: "absolute",
+      display: "inline-block",
+      zIndex: 9,
+      left: "0px",
+      top: "0px",
+      width: "100%",
+      textAlign: "center",
+      margin: 0,
+      padding: 0,
+      fontSize: '14px',
+      fontFamily: 'Helvetica',
+      color: '#FFF',
+      backgroundColor: 'rgba(50, 50, 50, 0.3)'
+    }
+
     return(
-      <div className='video-container'>
+      <div style={containerStyle}>
         <QrReader
           delay={this.state.delay}
           style={previewStyle}
           onError={this.handleError}
           onScan={this.handleScan}
-          >
-        </QrReader>
-        <p className='video-overlay'>{this.state.overlay}</p>
+          />
+        <p style={overlayStyle}>{this.state.overlay}</p>
       </div>
     )
   }
