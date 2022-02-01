@@ -23,7 +23,7 @@ function App() {
         <QRCodeReader width={160} height={120} onData={onData}></QRCodeReader>
       </section>
       <section>
-        <QRCodeShow value={url} size={128} />
+        <QRCodeShow value={url} img="coindesk.png" type="rounded" size={128} />
       </section>
       <section>
         <p>{url}</p>
