@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The `components` folder has a `QRCodeReader` component (for scanning QR codes with the camera) along with a `QRCodeShow` component for displaying one given text. There is also a `QRCodeShowLite` component that was used for size-testing, that used a much lighter library. However, after testing both, the difference for the whole bundle was 715KB vs 678KB so the size difference was not significant compared to the differences between the two source library sizes.
+The `components` folder has a `QRCodeReader` component (for scanning QR codes with the camera) along with a `QRCodeShow` component for displaying one given text. There is also a `QRCodeShowLite` component that was used for size-testing, that used a much lighter library. However, after testing both, the difference for the whole bundle was 715KB vs 678KB so the size difference was not significant compared to the differences between the two source library sizes.  See the `yarn analyze` command below.
 
 ## Available Scripts
 
